@@ -3,7 +3,7 @@
 # Function: Deploy KVM VMs from template
 
 HOSTNAME=$1
-VMNAME=$($1 | awk '{print toupper($0)}')
+VMNAME='$($1 | awk '{print toupper($0)}')'
 
 # Clone new VM from template
 
