@@ -3,22 +3,21 @@
 # Function: Deploy KVM VMs from template
 
 HOSTNAME=$1
-VMNAME='$($1 | awk '{print toupper($0)}')'
 
 # Clone new VM from template
 
 virt-clone \
 #--connect $KVM_HYPERVISOR
 --original centos7-template \
---name $VMNAME \
---file /kvm-vm-storage/$1.qcow2
+--name $HOSTNAME \
+--file /kvm-vm-storage/$HOSTNAME.qcow2
 
 virt-sysprep \
 #--connect $KVM_HYPERVISOR
---domain $VMNAME \
+--domain $HOSTNAME \
 --colours \
 --network \
---hostname $1 \
+--hostname $HOSTNAME \
 --update
 
-virsh start $VMNAME
+virsh start $HOSTNAME
