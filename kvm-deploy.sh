@@ -15,7 +15,7 @@ virt-clone \
 
 virt-sysprep \
 #--connect $KVM_HYPERVISOR
---add /kvm-vm-storage/$1.qcow2 \
+--domain $VMNAME \
 --colours \
 --network \
 --hostname $1 \
