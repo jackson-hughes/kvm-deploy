@@ -7,13 +7,11 @@ HOSTNAME=$1
 # Clone new VM from template
 
 virt-clone \
-#--connect $KVM_HYPERVISOR
 --original centos7-template \
 --name $HOSTNAME \
 --file /kvm-vm-storage/$HOSTNAME.qcow2
 
 virt-sysprep \
-#--connect $KVM_HYPERVISOR
 --domain $HOSTNAME \
 --colours \
 --network \
