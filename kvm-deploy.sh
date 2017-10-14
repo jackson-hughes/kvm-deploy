@@ -1,0 +1,23 @@
+#!/bin/bash
+# Author: Jackson Hughes
+# Function: Deploy KVM VMs from template
+
+HOSTNAME=$1
+
+# Clone new VM from template
+
+virt-clone \
+#--connect $KVM_HYPERVISOR
+--original centos7-template \
+--name ${$1^^} \
+--file /kvm-vm-storage/$1.qcow2
+
+virt-sysprep \
+#--connect $KVM_HYPERVISOR
+--add /kvm-vm-storage/$1.qcow2 \
+--colours \
+--network \
+--hostname $1 \
+--update
+
+virsh start ${$1^^}
