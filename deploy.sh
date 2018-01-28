@@ -4,13 +4,12 @@
 # Function: Deploy KVM node from template
 
 HOSTNAME=$1
-
-# Initialise ZFS dataset for new node
+FIRSTBOOT-SCRIPT=/vault/kvm-vm-templates/script.sh
 
 # Create new node from template
 virt-clone \
---original \
---name $HOSTNAME \
+--original-xml /vault/kvm-vm-templates/ubuntu16.04-template.xml \
+--name $HOSTNAME 
 --file /vault/kvm-vm-storage/$HOSTNAME.qcow2
 
 # Sysprep newly created node - including update and firstboot script. 
@@ -18,8 +17,7 @@ virt-sysprep \
 --domain $HOSTNAME \
 --colours \
 --hostname $HOSTNAME \
---firstboot
-
+--firstboot $FIRSTBOOT-SCRIPT
  
 # Start node
 virsh start $HOSTNAME  
