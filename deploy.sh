@@ -12,11 +12,13 @@ virt-clone \
 --name $HOSTNAME \
 --file /vault/kvm-vm-storage/$HOSTNAME.qcow2
 
-# Sysprep newly created node - including update and firstboot script. 
-virt-sysprep \
---domain $HOSTNAME \
+# Sysprep newly created node - including update and firstboot script.
+virt-sysprep --domain $HOSTNAME \
+--update \
 --hostname $HOSTNAME \
---firstboot $FIRSTBOOTSCRIPT
+--operations defaults \
+--operations -cron-spool,-package-manager-cache \
+--firstboot /vault/kvm-vm-templates/script.sh
 
 # Start node
 virsh start $HOSTNAME
