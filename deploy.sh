@@ -9,7 +9,7 @@ HOSTNAME=$1
 FIRSTBOOTSCRIPT=/vault/kvm-vm-templates/script.sh
 
 display_usage() {
-    echo -e '\nUsage: This script requires two arguments, hostname and OS of the VM to be deployed\n\nE.g. bash deploy.sh test-machine centos\n'
+    echo -e '\nUsage: This script requires two arguments - hostname and OS of the VM to be deployed\n\nE.g. bash deploy.sh test-machine centos\n'
 }
 
 if [ $# -eq 0 ]; then
