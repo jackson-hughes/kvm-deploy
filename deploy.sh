@@ -6,7 +6,7 @@
 set -xe
 
 HOSTNAME=$1
-FIRSTBOOTSCRIPT=/vault/kvm-vm-templates/script.sh
+OS=$2
 
 display_usage() {
     echo -e '\nUsage: This script requires two arguments - hostname and OS of the VM to be deployed\n\nE.g. bash deploy.sh test-machine centos\n'
@@ -17,18 +17,9 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-if [ "$2" == 'centos' ]; then
-    TEMPLATE='centos7-template'
-elif [ "$2" == 'ubuntu' ]; then
-    TEMPLATE='ubuntu16.04-template'
-else
-    display_usage
-    exit1
-fi
-
 # Create new node from template
 virt-clone \
---original-xml /vault/kvm-vm-templates/$TEMPLATE.xml \
+--original-xml /vault/kvm-vm-templates/$OS-template.xml \
 --name $HOSTNAME \
 --file /vault/kvm-vm-storage/$HOSTNAME.qcow2
 
@@ -37,7 +28,7 @@ virt-sysprep --domain $HOSTNAME \
 --hostname $HOSTNAME \
 --operations defaults \
 --operations -cron-spool,-package-manager-cache \
---firstboot /vault/kvm-vm-templates/script.sh
+--firstboot /vault/kvm-vm-templates/$OS-firstboot.sh
 
 # Start node
 virsh start $HOSTNAME
