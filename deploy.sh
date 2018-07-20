@@ -28,7 +28,7 @@ virt-sysprep --domain $HOSTNAME \
 --hostname $HOSTNAME \
 --operations defaults \
 --operations -cron-spool,-package-manager-cache \
---firstboot /vault/kvm-vm-templates/$OS-firstboot.sh
+--firstboot bin/$OS-firstboot.sh
 
 # Start node
 virsh start $HOSTNAME
