@@ -19,4 +19,4 @@ EOF
 chown -R ansible: /home/ansible/.ssh && chmod 600 /home/ansible/.ssh/authorized_keys
 
 # Allow Ansible to execute passwordless sudo
-echo -e "ansible\tALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible_all
+echo -e "ansible\tALL=(ALL) NOPASSWD: ALL\nDefaults:ansible\t!requiretty" > /etc/sudoers.d/ansible_all
