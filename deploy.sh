@@ -28,7 +28,7 @@ virt-sysprep --domain $HOSTNAME \
 --hostname $HOSTNAME \
 --operations defaults \
 --operations -cron-spool,-package-manager-cache \
---firstboot bin/$OS-firstboot.sh
+--firstboot firstboot_scripts/$OS-firstboot.sh
 
 # Start node
 virsh start $HOSTNAME
