@@ -32,9 +32,9 @@ virt-install \
 --import
 
 # Sysprep newly created node - including update and firstboot script.
-virt-sysprep --domain $HOSTNAME \
---hostname $HOSTNAME \
---operations defaults \
---operations -cron-spool,-package-manager-cache \
+#virt-sysprep --domain $HOSTNAME \
+#--hostname $HOSTNAME \
+#--operations defaults \
+#--operations -cron-spool,-package-manager-cache \
 
 exit 0
